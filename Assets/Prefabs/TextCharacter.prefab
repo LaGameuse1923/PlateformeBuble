@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1570804144082600847}
   - component: {fileID: 3391094767575641462}
   - component: {fileID: 8311329660323379144}
+  - component: {fileID: 8824989663379316380}
   m_Layer: 0
   m_Name: TextCharacter
   m_TagString: Untagged
@@ -171,3 +172,18 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+--- !u!114 &8824989663379316380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730124090725802528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7b84963e56afc4399ad1fc6cec7ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCorrect: 0
+  wrongKeySound: {fileID: 8300000, guid: 4220eb60c8c0a4edc9021708241561dd, type: 3}
+  cooldownDuration: 1

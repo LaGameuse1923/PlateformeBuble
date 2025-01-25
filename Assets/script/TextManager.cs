@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class TextManager : MonoBehaviour
 {
-    public string initialText = "Ths is a tst!";
-    public string correctText = "This is a text!";
+    public string initialText = "Moi, votre nouveau présigent, je vous projet l'égalité et la libelté dans une nation uni et solidaires ou l'indiwidu seul n'aura pas sa plase!";
+    public string correctText = "Moi, votre nouveau président, je vous projet l'égalité et la liberté dans une nation unie et solidaires ou l'individu seul n'aura pas sa place!";
+    private string _currentText;
     public GameObject characterPrefab; // Prefab with a TextMeshPro component
     public float characterSpacingFactor = 0.1f; // Extra space between characters
     public float maxWidth = 100.0f; // Nb of pixels before line break
@@ -22,6 +23,7 @@ public class TextManager : MonoBehaviour
     void Start()
     {
         GenerateText();
+        _currentText = initialText;
     }
 
     // Update is called once per frame
@@ -48,6 +50,7 @@ public class TextManager : MonoBehaviour
             // Instantiate the character object
             GameObject charObject = Instantiate(characterPrefab, transform);
             TextMeshPro textComponent = charObject.GetComponent<TextMeshPro>();
+            textComponent.sortingOrder = 2;
             
 
             // Debug.Log($"Position {result.position}: {result.result} (Expected: '{result.expected}', Actual: '{result.actual}')");
@@ -56,7 +59,7 @@ public class TextManager : MonoBehaviour
             if (result.result == StringComparer.ComparisonResult.Correct)
             {
                 textComponent.text = result.expected == '\0' ? "" : result.expected.ToString(); // Hide visual for spaces
-                textComponent.color = Color.white; // Correct characters in default color
+                textComponent.color = Color.black; // Correct characters in default color
             }
             else if (result.result == StringComparer.ComparisonResult.Missing) // Missing in `initialText`
             {
@@ -100,6 +103,7 @@ public class TextManager : MonoBehaviour
             textComponent.ForceMeshUpdate();
             
             CharacterController charController = charObject.AddComponent<CharacterController>();
+            charController.indexInString = result.position;
             charController.CorrectCharacter = result.expected; // Set the correct character
             charController.isCorrect = result.result == StringComparer.ComparisonResult.Correct;
             

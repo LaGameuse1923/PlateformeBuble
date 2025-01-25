@@ -72,8 +72,7 @@ public class CharacterController : MonoBehaviour
             else
                 return;
             
-            // TODO: make color customizable
-            _textComponent.color = Color.black; // Change color to indicate it's correct
+            _textComponent.color = _textManager.normalColor; // Change color to indicate it's correct
             _textComponent.fontStyle = FontStyles.Normal;
             
             _textManager.CorrectError();

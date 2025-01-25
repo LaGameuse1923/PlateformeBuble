@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CharTween;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +13,10 @@ public class TextManager : MonoBehaviour
     public float characterSpacingFactor = 0.1f; // Extra space between characters
     public float maxWidth = 100.0f; // Nb of pixels before line break
     public float lineHeight = 20.0f; // Nb of pixels before line break
+    
+    private int _totalErrors = 0;
+    private int _errorsLeft = 0;
+    private int _errorsCorrected = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -31,17 +37,20 @@ public class TextManager : MonoBehaviour
         
         StringComparer comparer = new StringComparer();
         var comparison = comparer.CompareStrings(initialText, correctText);
-
         
-        int maxLength = Mathf.Max(initialText.Length, correctText.Length); // Ensure we check both strings
-        Debug.Log(maxLength);
-
         foreach (var result in comparison)
         {
+            if (result.result != StringComparer.ComparisonResult.Correct)
+            {
+                _errorsLeft++;
+                _totalErrors++;
+            }
             // Instantiate the character object
             GameObject charObject = Instantiate(characterPrefab, transform);
             TextMeshPro textComponent = charObject.GetComponent<TextMeshPro>();
-            Debug.Log($"Position {result.position}: {result.result} (Expected: '{result.expected}', Actual: '{result.actual}')");
+            
+
+            // Debug.Log($"Position {result.position}: {result.result} (Expected: '{result.expected}', Actual: '{result.actual}')");
             
             // Determine displayed character and color
             if (result.result == StringComparer.ComparisonResult.Correct)
@@ -71,7 +80,8 @@ public class TextManager : MonoBehaviour
             
             // Measure character size (spaces included)
             Vector2 charSize = textComponent.GetPreferredValues(finalChar.ToString());
-            float charWidth = finalChar == ' ' ? textComponent.fontSize * 0.025f : charSize.x; // Estimate space width
+            // Estimate space width. White spaces have no size so have to use font size.
+            float charWidth = finalChar == ' ' ? textComponent.fontSize * 0.025f : charSize.x; 
 
             // Set position based on calculated width
             charObject.transform.localPosition = new Vector3(currentXOffset, currentYOffset, 0);
@@ -87,14 +97,69 @@ public class TextManager : MonoBehaviour
                 currentYOffset -= lineHeight; // Move down a line
             }
             
+            textComponent.ForceMeshUpdate();
+            
+            CharacterController charController = charObject.AddComponent<CharacterController>();
+            charController.CorrectCharacter = result.expected; // Set the correct character
+            charController.isCorrect = result.result == StringComparer.ComparisonResult.Correct;
+            
+            // Add and configure BoxCollider2D
+            BoxCollider2D charCollider = charObject.AddComponent<BoxCollider2D>();
+            charCollider.isTrigger = true;
 
-            // Optional: Add colliders or other components
-            // BoxCollider2D collider = charObject.AddComponent<BoxCollider2D>();
-            // collider.size = new Vector2(charWidth, charSize.y);
-            // collider.offset = new Vector2(charWidth / 2, -charSize.y / 2);
+            // Adjust collider size and offset to match the character's size
+            Bounds textBounds = textComponent.textBounds;
+            charCollider.size = new Vector2(textBounds.size.x, textBounds.size.y); // Match width and height
+            charCollider.offset = new Vector2(textBounds.center.x, textBounds.center.y); // Center the collider
         }
     }
+    
+    public void UpdateCharacterPositions()
+    {
+        float currentXOffset = 0;
+        float currentYOffset = 0;
+
+        foreach (Transform child in transform)
+        {
+            var textComponent = child.GetComponent<TextMeshPro>();
+            if (textComponent == null) continue;
+
+            // Measure the character's width
+            char finalChar = textComponent.text == "" ? '\0' : textComponent.text[0];
+            Vector2 charSize = textComponent.GetPreferredValues(finalChar.ToString());
+            float charWidth = finalChar == ' ' ? textComponent.fontSize * 0.025f : charSize.x;
+
+            // Set the new position
+            child.localPosition = new Vector3(currentXOffset, currentYOffset, 0);
+
+            // Update the X offset
+            currentXOffset += charWidth + characterSpacingFactor;
+
+            // Check for line breaks
+            if (currentXOffset + charWidth > maxWidth)
+            {
+                currentXOffset = 0;
+                currentYOffset -= lineHeight;
+            }
+            
+            
+            // Update the colliders to match the new size
+            BoxCollider2D charCollider = child.GetComponent<BoxCollider2D>();
+
+            textComponent.ForceMeshUpdate();
+            Bounds textBounds = textComponent.textBounds;
+            charCollider.size = new Vector2(textBounds.size.x, textBounds.size.y); // Match width and height
+            charCollider.offset = new Vector2(textBounds.center.x, textBounds.center.y); // Center the collider
+        }
+    }
+
+    public void CorrectError()
+    {
+        _errorsCorrected++;
+        _errorsLeft--;
+    }
 }
+
 
 
 class StringComparer

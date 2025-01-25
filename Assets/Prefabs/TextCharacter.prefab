@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1570804144082600847}
   - component: {fileID: 3391094767575641462}
   - component: {fileID: 8311329660323379144}
-  - component: {fileID: 4456275515482322857}
   m_Layer: 0
   m_Name: TextCharacter
   m_TagString: Untagged
@@ -172,11 +171,3 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
---- !u!33 &4456275515482322857
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730124090725802528}
-  m_Mesh: {fileID: 0}

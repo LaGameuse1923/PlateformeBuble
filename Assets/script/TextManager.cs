@@ -9,7 +9,6 @@ public class TextManager : MonoBehaviour
 {
     public string initialText = "Moi, votre nouveau presigent, je vous projet l'egalite et la libelte dans une nation uni et solidaires ou l'indiwidu seul n'aura pas sa plase!";
     public string correctText = "Moi, votre nouveau president, je vous projet l'egalite et la liberte dans une nation unie et solidaires ou l'individu seul n'aura pas sa place!";
-    private string _currentText;
     public GameObject characterPrefab; // Prefab with a TextMeshPro component
     public float characterSpacingFactor = 0.1f; // Extra space between characters
     public float maxWidth = 100.0f; // Nb of units before line break
@@ -26,7 +25,6 @@ public class TextManager : MonoBehaviour
     void Start()
     {
         GenerateText();
-        _currentText = initialText;
     }
 
     // Update is called once per frame

@@ -14,8 +14,10 @@ public class CharacterController : MonoBehaviour
     
     private AudioSource _audioSource; // Audio source to play sound effects
     private bool _isLocked; // Cooldown lock
-    
-    
+
+
+    public PlayerFreeMovement playerFreeMovement;
+    public Animator animator;
     private char _replaceWith; // The correct character to display
     private TextMeshPro _textComponent; // Text of the character
     private TextManager _textManager; // Text manager with the entire text
@@ -24,6 +26,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         _textComponent = GetComponent<TextMeshPro>();
         _textManager = FindObjectOfType<TextManager>();
         if (!isCorrect)
@@ -66,6 +69,7 @@ public class CharacterController : MonoBehaviour
         // If remove was pressed, and it's the character should be removed
         if ((Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace)) && CorrectCharacter == '\0')
         {
+            playerFreeMovement.Effacer();
             isCorrect = true;
             StartDisappearingEffect();
             ResetCollisionTweens();

@@ -60,15 +60,11 @@ public class EnemySpawner : MonoBehaviour
 
         // Spawn the enemy
         var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        var enemyScript = enemy.GetComponent<BaseEnemy>();
+        enemyScript.spawner = this;
         _currentEnemyCount++;
 
         // TODO: Handle enemy despawn
-        // Set the enemy to despawn after its lifetime
-        // Enemy enemyScript = enemy.GetComponent<Enemy>();
-        // if (enemyScript != null)
-        // {
-        //     enemyScript.OnDespawn += HandleEnemyDespawn;
-        // }
         return true;
     }
 

@@ -13,6 +13,8 @@ public class MovePlayer : MonoBehaviour
     public float jump = 3;
     private Vector3 change;
 
+    private string input;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,7 @@ public class MovePlayer : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
 
-        DeplacementPlayer(horizontalMovement);
+        //DeplacementPlayer(horizontalMovement);
 
         /*
         if (Input.GetKeyDown(KeyCode.Space))
@@ -38,6 +40,13 @@ public class MovePlayer : MonoBehaviour
         }
         */
     }
+
+    public void ReadStringInput(string s)
+    {
+        input = s;
+        Debug.Log(input);
+    }
+
 
     public void DeplacementPlayer(float _horizontalMovement)
     {

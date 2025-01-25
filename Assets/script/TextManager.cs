@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class TextManager : MonoBehaviour
 {
-    public string initialText = "Moi, votre nouveau présigent, je vous projet l'égalité et la libelté dans une nation uni et solidaires ou l'indiwidu seul n'aura pas sa plase!";
-    public string correctText = "Moi, votre nouveau président, je vous projet l'égalité et la liberté dans une nation unie et solidaires ou l'individu seul n'aura pas sa place!";
+    public string initialText = "Moi, votre nouveau presigent, je vous projet l'egalite et la libelte dans une nation uni et solidaires ou l'indiwidu seul n'aura pas sa plase!";
+    public string correctText = "Moi, votre nouveau president, je vous projet l'egalite et la liberte dans une nation unie et solidaires ou l'individu seul n'aura pas sa place!";
     private string _currentText;
     public GameObject characterPrefab; // Prefab with a TextMeshPro component
     public float characterSpacingFactor = 0.1f; // Extra space between characters
@@ -146,8 +146,7 @@ public class TextManager : MonoBehaviour
                 // Add to list for possible adjustments
                 charObjects.Add((charObject, charWidth));
                 
-                CharacterController charController = charObject.AddComponent<CharacterController>();
-                charController.indexInString = character.position;
+                var charController = charObject.GetComponent<CharacterController>();
                 charController.CorrectCharacter = character.expected; // Set the correct character
                 charController.isCorrect = character.result == StringComparer.ComparisonResult.Correct;
                 textComponent.ForceMeshUpdate();

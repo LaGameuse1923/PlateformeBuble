@@ -247,8 +247,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Example of <#ff8000>multiple</color>
 
-    <#00ff00>lines</color> of text
-    created
+    <#00ff00>lines</color> of text created
 
     with <#80ff80>TextMesh <#8080ff>Pro</color>!'
   m_isRightToLeft: 0

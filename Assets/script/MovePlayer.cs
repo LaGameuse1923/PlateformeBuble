@@ -32,13 +32,15 @@ public class MovePlayer : MonoBehaviour
 
         //DeplacementPlayer(horizontalMovement);
 
-        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //_rb.AddForce
-            _rb.velocity = _rb.velocity * vitesse;
+            Jump(jump);
         }
-        */
+    }
+
+    private void Jump(float jumpForce)
+    {
+        _rb.velocity += new Vector2(_rb.velocity.x, jumpForce);
     }
 
     public void ReadStringInput(string s)
@@ -51,6 +53,6 @@ public class MovePlayer : MonoBehaviour
     public void DeplacementPlayer(float _horizontalMovement)
     {
         Vector3 targetVelocity = new Vector2(_horizontalMovement, _rb.velocity.y);
-        _rb.velocity = Vector3.SmoothDamp(_rb.velocity, targetVelocity, ref velocity, .05f);
+        _rb.velocity = Vector3.SmoothDamp(_rb.velocity, targetVelocity, ref velocity, .15f);
     }
 }

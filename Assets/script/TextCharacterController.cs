@@ -6,13 +6,12 @@ using TMPro;
 
 public class CharacterController : MonoBehaviour
 {
-    public int indexInString;
     public char? CorrectCharacter; // The correct character to display
     private char _replaceWith; // The correct character to display
     public bool isCorrect; // Whether the character is already correct
     private TextMeshPro _textComponent;
     private TextManager _textManager;
-    private bool _active;
+    private bool _isPlayerInTrigger;
     private List<KeyCode> _alphaKeys;
 
     private void Start()
@@ -32,61 +31,72 @@ public class CharacterController : MonoBehaviour
         CorrectCharacter ??= '\0'; //TODO: add an animation when it disappers
 
     }
-
-    private void OnTriggerStay2D(Collider2D other)
+    
+    private void Update()
     {
-        if (isCorrect) return; // Do nothing if the character is already correct
-
-        _active = true;
-        ApplyTweens();
-        
-        // Check if the collider belongs to the player
-        if (other.CompareTag("Player"))
+        if (_isPlayerInTrigger && !isCorrect)
         {
-            // Replace the incorrect character with the correct one
-            var alphaKeyPressed = false;
-            char newChar = '\0';
-            
-            foreach (var key in _alphaKeys) 
-            {
-                if (Input.GetKeyDown(key))
-                {
-                    newChar = (char)((int)key);
-                    alphaKeyPressed = true;
-                }
-            }
-
-            if ((Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace)) && CorrectCharacter == '\0')
-                _textComponent.text = '\0'.ToString();
-            else if (alphaKeyPressed)
-                if (newChar == CorrectCharacter)
-                {
-                    _textComponent.text = newChar.ToString();
-                    isCorrect = true;
-                }                
-                else
-                {
-                    Debug.Log($"Incorrect character selected, should be '{CorrectCharacter}'");
-                    return;
-                }
-            else
-                return;
-            
-            _textComponent.color = _textManager.normalColor; // Change color to indicate it's correct
-            _textComponent.fontStyle = FontStyles.Normal;
-            
-            _textManager.CorrectError();
-            _textManager.UpdateCharacterPositions();
-            
-            ResetTweens();
+            HandleInput();
         }
     }
+    
+    private void HandleInput()
+    {
+        char newChar = '\0';
+        bool alphaKeyPressed = false;
+
+        foreach (var key in _alphaKeys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                newChar = (char)((int)key);
+                alphaKeyPressed = true;
+                break;
+            }
+        }
+        
+        if ((Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace)) && CorrectCharacter == '\0')
+            _textComponent.text = '\0'.ToString();
+        else if (alphaKeyPressed)
+        {
+            if (newChar == CorrectCharacter)
+            {
+                _textComponent.text = newChar.ToString();
+            }
+            else
+            {
+                Debug.Log($"Incorrect character selected, should be '{CorrectCharacter}'");
+                return;
+            }
+        }
+        else return;
+        
+        isCorrect = true;
+        _textComponent.color = _textManager.normalColor;
+        _textComponent.fontStyle = FontStyles.Normal;
+
+        _textManager.CorrectError();
+        _textManager.UpdateCharacterPositions();
+        ResetTweens();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !isCorrect)
+        {
+            ApplyTweens();
+            _isPlayerInTrigger = true;
+        }
+    }
+            
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!_active) return;
-        ResetTweens();
-        _active = false;
+        if (other.CompareTag("Player"))
+        {
+            _isPlayerInTrigger = false;
+            ResetTweens();
+        }
     }
 
     private void ApplyTweens()

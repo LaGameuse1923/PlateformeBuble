@@ -147,7 +147,6 @@ public class TextManager : MonoBehaviour
                 charObjects.Add((charObject, charWidth));
                 
                 CharacterController charController = charObject.AddComponent<CharacterController>();
-                charController.indexInString = character.position;
                 charController.CorrectCharacter = character.expected; // Set the correct character
                 charController.isCorrect = character.result == StringComparer.ComparisonResult.Correct;
                 textComponent.ForceMeshUpdate();

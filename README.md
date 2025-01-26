@@ -4,7 +4,8 @@ In this game you play as Professor Crick. The President is about to give a speec
 The intrusive thoughts will try to hurt your efforts so try and evade them!
 
 ## Authours
-This game was made by Stepan Tyurin, Maxence, Maxime...
+This game was made by Stepan Tyurin, Kelvyn Grimault, Maxence Dixneuf, Erwann Baesens-Prigent, Nataël Forget, 
+Gabriel Martinache, Nicolas Guillois, all students of ESMA Rennes (with the exception of Stepan Tyurin, student at Université de Rennes).
 
 ## Game
 This game is made with Unity 2022. All assets are written and drawn with our hands.

@@ -69,7 +69,7 @@ public class CharacterController : MonoBehaviour
         // If remove was pressed, and it's the character should be removed
         if ((Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace)) && CorrectCharacter == '\0')
         {
-            //playerFreeMovement.Effacer();
+            playerFreeMovement.Effacer();
             isCorrect = true;
             StartDisappearingEffect();
             ResetCollisionTweens();

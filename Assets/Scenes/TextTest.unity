@@ -260,7 +260,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1468395114, guid: 06eb9467e32706a41a022995d087c717, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstLevelBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 4933262304229553827, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
+      propertyPath: playerFreeMovement
+      value: 
+      objectReference: {fileID: 189990326}
     - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: player
       value: 

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class Menu : MonoBehaviour
 {
     public Animation animationplay;
     public bool PlayMenu = false;
     
+    public VideoPlayer player;
     public Animator animator;
 
 
@@ -33,6 +35,12 @@ public class Menu : MonoBehaviour
         animationplay.animationPlayer();
         PlayMenu = true;
         animator.SetBool("PlayMenu", PlayMenu);
+        Invoke("LancementAnimation", 0.6f);
+    }
+
+    public void LancementAnimation()
+    {
+        player.Play();
     }
 }
 

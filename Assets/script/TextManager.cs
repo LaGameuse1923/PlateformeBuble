@@ -28,6 +28,7 @@ public class TextManager : MonoBehaviour
     void Start()
     {
         GenerateText();
+        _errorsLeft = _totalErrors;
     }
 
     // Update is called once per frame
@@ -122,18 +123,21 @@ public class TextManager : MonoBehaviour
                 {
                     textComponent.text = "!";
                     textComponent.color = errorColor; // Red exclamation for missing characters
+                    _totalErrors++; 
                 }
                 else if (character.result == StringComparer.ComparisonResult.Extra) // Extra in `initialText`
                 {
                     textComponent.text = character.actual?.ToString() ?? "";
                     textComponent.color = errorColor; // Highlight extra characters
                     textComponent.fontStyle = FontStyles.Underline;
+                    _totalErrors++;
                 }
                 else // Incorrect character
                 {
                     textComponent.text = character.actual?.ToString() ?? "";
                     textComponent.color = errorColor; // Highlight incorrect characters
                     textComponent.fontStyle = FontStyles.Bold;
+                    _totalErrors++;
                 }
 
                 // Measure character size
@@ -167,6 +171,7 @@ public class TextManager : MonoBehaviour
     }
     
     
+        
     public void UpdateCharacterPositions()
     {
         float currentXOffset = 0;
@@ -253,6 +258,16 @@ public class TextManager : MonoBehaviour
                 charCollider.offset = new Vector2(textBounds.center.x, textBounds.center.y);
             }
         }
+    }
+
+    public int GetError()
+    {
+        return _errorsLeft;
+    }
+
+    public int GetTotal()
+    {
+        return _totalErrors;
     }
 
     public void CorrectError()

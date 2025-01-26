@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour
+public abstract class BaseEnemy : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
     private Coroutine _lifeTimeCouroutine;
@@ -13,10 +13,14 @@ public class BaseEnemy : MonoBehaviour
     
     private void Start()
     {
+        HandleStart();
         _rigidbody = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _lifeTimeCouroutine = StartCoroutine(Die());
     }
+
+    // Each Enemy has to implement this method with everything it wants to do in Start method
+    public abstract void HandleStart();
     
     private IEnumerator Die()
     {

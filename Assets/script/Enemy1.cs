@@ -45,5 +45,9 @@ public class Enemy1 : BaseEnemy
         Destroy(gameObject);
     }
 
-    
+
+    public override void HandleStart()
+    {
+        return;
+    }
 }

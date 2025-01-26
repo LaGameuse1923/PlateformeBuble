@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96183648ffa3438b88edc5cbdaf0fc65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialText: Form this day foryard, the Unintendo States of America shall bet a
-    tree, sovereign, band independent notion.
-  correctText: From this day forward, the United States of America shall be a free,
-    sovereign, and independent nation.
+  initialText: Starting twoday, we must lick ourselves cup, bust ourselves off, and
+    betin agame the worm of rebating America.
+  correctText: Starting today, we must pick ourselves up, dust ourselves off, and
+    begin again the work of remaking America.
   characterPrefab: {fileID: 1730124090725802528, guid: ad5a7221fb69458e6a433e70e65e4463, type: 3}
   characterSpacingFactor: 0
   maxWidth: 42
@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7274254187438743068}
   m_Layer: 0
-  m_Name: FirstLevelBubble
+  m_Name: SecondLevelBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,8 +116,8 @@ Transform:
   m_GameObject: {fileID: 2749106396496177328}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: -12.5, z: 0}
-  m_LocalScale: {x: 16, y: 18, z: 7}
+  m_LocalPosition: {x: 6.64, y: -15.4, z: 0}
+  m_LocalScale: {x: 16, y: 22, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7274254187438743068}
@@ -340,8 +340,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  bubble: {fileID: 0}
+  bubble: {fileID: 3394949343524049629}
   spawnRadius: 5
-  spawnInterval: 2
-  enemyPrefabs: []
-  maxEnemyCount: 0
+  spawnInterval: 1
+  enemyPrefabs:
+  - {fileID: 6216030212052024737, guid: 9b6d99bd408a7c03a802762fc37a982a, type: 3}
+  - {fileID: 6216030212052024737, guid: 51f2e88b4c5cc60978cf5faea206d24a, type: 3}
+  maxEnemyCount: 15

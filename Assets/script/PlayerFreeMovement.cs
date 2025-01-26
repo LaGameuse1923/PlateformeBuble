@@ -1,19 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFreeMovement : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-
-    public float vitesse = 5;
-    private Vector3 velocity = Vector3.zero;
-    private float horizontalMovement;
-    private float verticalMovement;
     public Animator animator;
-    private Vector3 change;
+    public float vitesse = 5;
+    public Camera cam;
+    public float dezoomFactor = 2f; // The factor by which the camera size is multiplied on dezoom
+    public float dezoomDuration = 5f; // How long the dezoom lasts
+    public float transitionSpeed = 0.5f; // Speed of the zoom transitio
+    public float cooldownDuration = 3f; // Cooldown duration
     
+    private float initialScale; // The initial size of the camera
+    private Rigidbody2D _rb;
+    private Vector3 _velocity = Vector3.zero;
+    private float _horizontalMovement;
+    private float _verticalMovement;
+    private Vector3 _change;
     private bool _isStunned = false;
+    private bool _isDezooming = false;
+    private bool _isCooldown = false;
     
 
     public bool effacer = false;
@@ -22,6 +28,12 @@ public class PlayerFreeMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        
+        // Store the camera's initial size
+        if (cam is not null)
+            initialScale = cam.orthographicSize;
+        else
+            Debug.LogError("Player Camera not assigned!");
     }
 
     // Update is called once per frame
@@ -30,43 +42,41 @@ public class PlayerFreeMovement : MonoBehaviour
         if (_isStunned)
             return;
         
-        horizontalMovement = Input.GetAxis("Horizontal") * vitesse;
-        verticalMovement = Input.GetAxis("Vertical") * vitesse;
+        _horizontalMovement = Input.GetAxis("Horizontal") * vitesse;
+        _verticalMovement = Input.GetAxis("Vertical") * vitesse;
 
-        change = Vector3.zero;
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
+        _change = Vector3.zero;
+        _change.x = Input.GetAxisRaw("Horizontal");
+        _change.y = Input.GetAxisRaw("Vertical");
 
-        DeplacementPlayer(horizontalMovement, verticalMovement);
+        DeplacementPlayer(_horizontalMovement, _verticalMovement);
 
-        if (change != Vector3.zero)
+        if (_change != Vector3.zero)
         {
 
-            animator.SetFloat("moveX", change.x);
-            animator.SetFloat("moveY", change.y);
+            animator.SetFloat("moveX", _change.x);
+            animator.SetFloat("moveY", _change.y);
             animator.SetBool("mouvement", true);
         }
         else
         {
             animator.SetBool("mouvement", false);
         }
+        
+        HandleDezoomInput();
     }
     
     public void DeplacementPlayer(float _horizontalMovement, float _verticalMovement)
     {
         Vector3 targetVelocity = new Vector2(_horizontalMovement, _verticalMovement);
-        _rb.velocity = Vector3.SmoothDamp(_rb.velocity, targetVelocity, ref velocity, .05f);
+        _rb.velocity = Vector3.SmoothDamp(_rb.velocity, targetVelocity, ref _velocity, .05f);
     }
 
     public void Effacer()
     {
-
         EffacerTrue();
-
         
         Invoke("EffacerFalse",0.9f);
-
-
     }
 
     public void EffacerTrue()
@@ -75,18 +85,10 @@ public class PlayerFreeMovement : MonoBehaviour
         animator.SetBool("Effacer", effacer);
     }
     
-    // Method to apply stun effect
-    // public void ApplyStun(float duration)
-    // {
-    //     _isStunned = true;
-    //     _rb.velocity = Vector2.zero; // Stop movement
-    //     Invoke(nameof(RemoveStun), duration);
-    // }
-    //
-    // private void RemoveStun()
-    // {
-    //     _isStunned = false;
-    // }
+    public void teleportToPoint(Vector2 point)
+    {
+        transform.position = point;
+    }
     
     public void ApplyPushback(Vector2 direction, float magnitude)
     {
@@ -111,6 +113,57 @@ public class PlayerFreeMovement : MonoBehaviour
         effacer = false;
         
         animator.SetBool("Effacer", effacer);
+    }
+    
+    
+    private void HandleDezoomInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !_isDezooming && !_isCooldown)
+        {
+            StartCoroutine(DezoomCamera());
+        }
+    }
+    
+    private IEnumerator DezoomCamera()
+    {
+        _isDezooming = true;
+
+        // Smoothly transition to the dezoom scale
+        yield return StartCoroutine(SmoothZoom(initialScale*dezoomFactor));
+
+        // Wait for the dezoom duration
+        yield return new WaitForSeconds(dezoomDuration);
+
+        // Smoothly transition back to the initial scale
+        yield return StartCoroutine(SmoothZoom(initialScale));
+
+        // Start cooldown
+        _isDezooming = false;
+        StartCoroutine(DezoomCooldown());    
+    }
+    
+    private IEnumerator SmoothZoom(float targetScale)
+    {
+        while (!Mathf.Approximately(cam.orthographicSize, targetScale))
+        {
+            cam.orthographicSize = Mathf.MoveTowards(
+                cam.orthographicSize,
+                targetScale,
+                transitionSpeed * Time.deltaTime
+            );
+
+            yield return null;
+        }
+    }
+    
+    private IEnumerator DezoomCooldown()
+    {
+        _isCooldown = true;
+
+        // Wait for the cooldown duration
+        yield return new WaitForSeconds(cooldownDuration);
+
+        _isCooldown = false;
     }
 
 }

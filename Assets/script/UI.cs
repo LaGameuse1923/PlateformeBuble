@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UI : MonoBehaviour
     public float nombreErreur = 5;
     public float nombreErreurRestante = 5;
     public TextMeshProUGUI NombreErreur;
+    public int scene;
 
     public float Timer = 300;
     public TextMeshProUGUI TextTimer;
@@ -42,7 +44,10 @@ public class UI : MonoBehaviour
         NombreErreur.text = nombreErreurRestante + " Typos Left".ToString();
         TextTimer.text = "Times: " + Timer.ToString();
         BarreDePopulariter.fillAmount = nombreErreurRestante / nombreErreur;
-        nombreErreurRestante = textManager.GetError();
+        if (textManager != null)
+            nombreErreurRestante = textManager.GetError();
+    
+        
 
         //Debug.Log(nombreErreurRestante);
     }
@@ -60,6 +65,7 @@ public class UI : MonoBehaviour
                 {
                     BF = true;
                     animator.SetBool("BF",BF );
+                    SceneManager.LoadScene(scene);
                 }else if (nombreErreurRestante > 5)
                 {
                     MF = true;

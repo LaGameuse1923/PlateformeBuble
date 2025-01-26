@@ -735,43 +735,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598078937}
   m_CullTransparentMesh: 1
---- !u!1 &645935913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 480691213896033549, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
-  m_PrefabInstance: {fileID: 753298946}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &645935916
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645935913}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2c2793cb8960f884fb9c9b9687381671, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &645935918 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4933262304229553827, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
-  m_PrefabInstance: {fileID: 753298946}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645935913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96183648ffa3438b88edc5cbdaf0fc65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &702311385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fdc1095e6b5a74293f68e3056210bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 645935918}
+  textManager: {fileID: 0}
   nombreErreur: 5
   nombreErreurRestante: 5
   NombreErreur: {fileID: 1225417435}
@@ -1453,7 +1416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fdc1095e6b5a74293f68e3056210bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 645935918}
+  textManager: {fileID: 0}
   nombreErreur: 5
   nombreErreurRestante: 5
   NombreErreur: {fileID: 1225417435}
@@ -2147,7 +2110,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1043678053}
-  - {fileID: 993063457}
   - {fileID: 189990331}
   - {fileID: 1337646157}
   - {fileID: 84810}
+  - {fileID: 753298946}

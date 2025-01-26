@@ -98,15 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d7fa24845138f41b9456490b4ec201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   spawner: {fileID: 0}
-  timeToLive: 2
+  timeToLive: 5
   target: {fileID: 0}
   followDistance: 0
-  catchDistance: 0
-  iscaught: 0
-  pushbackForce: 50
-  stunDuration: 0.5
+  pushbackForce: 10
 --- !u!61 &5168910659169423341
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -453,6 +453,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 189990331}
+    - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
+      propertyPath: maxEnemyCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7111327191048700432, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: player
       value: 

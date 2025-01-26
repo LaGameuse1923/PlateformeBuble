@@ -473,11 +473,15 @@ PrefabInstance:
       objectReference: {fileID: 189990331}
     - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: spawnRadius
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: maxEnemyCount
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
+      propertyPath: spawnInterval
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: enemyPrefabs.Array.size

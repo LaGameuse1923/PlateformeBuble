@@ -108,8 +108,8 @@ public class TextManager : MonoBehaviour
             // Process each character in the word or space
             foreach (var character in word.characters)
             {
-                GameObject charObject = Instantiate(characterPrefab, transform);
-                TextMeshPro textComponent = charObject.GetComponent<TextMeshPro>();
+                var charObject = Instantiate(characterPrefab, transform);
+                var textComponent = charObject.GetComponent<TextMeshPro>();
                 textComponent.sortingOrder = 2;
 
                 // Determine displayed character and color
@@ -122,23 +122,26 @@ public class TextManager : MonoBehaviour
                 {
                     textComponent.text = "!";
                     textComponent.color = errorColor; // Red exclamation for missing characters
+                    _totalErrors++;
                 }
                 else if (character.result == StringComparer.ComparisonResult.Extra) // Extra in `initialText`
                 {
                     textComponent.text = character.actual?.ToString() ?? "";
                     textComponent.color = errorColor; // Highlight extra characters
                     textComponent.fontStyle = FontStyles.Underline;
+                    _totalErrors++;
                 }
                 else // Incorrect character
                 {
                     textComponent.text = character.actual?.ToString() ?? "";
                     textComponent.color = errorColor; // Highlight incorrect characters
                     textComponent.fontStyle = FontStyles.Bold;
+                    _totalErrors++;
                 }
 
                 // Measure character size
-                Vector2 charSize = textComponent.GetPreferredValues(textComponent.text);
-                float charWidth = (character.actual == ' ') ? spaceWidth : charSize.x;
+                var charSize = textComponent.GetPreferredValues(textComponent.text);
+                var charWidth = (character.actual == ' ') ? spaceWidth : charSize.x;
 
                 // Set position and update offsets
                 charObject.transform.localPosition = new Vector3(currentXOffset, currentYOffset, 0);
@@ -154,12 +157,12 @@ public class TextManager : MonoBehaviour
                 textComponent.ForceMeshUpdate();
 
                 // Add and configure BoxCollider2D
-                BoxCollider2D charCollider = charObject.AddComponent<BoxCollider2D>();
+                var charCollider = charObject.AddComponent<BoxCollider2D>();
                 charCollider.isTrigger = true;
                 
                 
 
-                Bounds textBounds = textComponent.textBounds;
+                var textBounds = textComponent.textBounds;
                 charCollider.size = new Vector2(textBounds.size.x, textBounds.size.y); // Match width and height
                 charCollider.offset = new Vector2(textBounds.center.x, textBounds.center.y); // Center the collider
             }

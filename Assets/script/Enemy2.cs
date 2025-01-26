@@ -10,8 +10,8 @@ public class Enemy2 : BaseEnemy //TODO: make the enemy, right now it's just a co
 
     //distance when the player is caught
     public float followDistance;
-
-    private void Start()
+    
+    public override void HandleStart()
     {
         if (spawner is null)
         {

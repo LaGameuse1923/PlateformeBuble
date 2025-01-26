@@ -12,6 +12,9 @@ public class PlayerFreeMovement : MonoBehaviour
     private float verticalMovement;
     public Animator animator;
     private Vector3 change;
+    
+    private bool _isStunned = false;
+    
 
     public bool effacer = false;
     // Start is called before the first frame update
@@ -24,6 +27,9 @@ public class PlayerFreeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_isStunned)
+            return;
+        
         horizontalMovement = Input.GetAxis("Horizontal") * vitesse;
         verticalMovement = Input.GetAxis("Vertical") * vitesse;
 
@@ -67,6 +73,37 @@ public class PlayerFreeMovement : MonoBehaviour
     {
         effacer = true;
         animator.SetBool("Effacer", effacer);
+    }
+    
+    // Method to apply stun effect
+    // public void ApplyStun(float duration)
+    // {
+    //     _isStunned = true;
+    //     _rb.velocity = Vector2.zero; // Stop movement
+    //     Invoke(nameof(RemoveStun), duration);
+    // }
+    //
+    // private void RemoveStun()
+    // {
+    //     _isStunned = false;
+    // }
+    
+    public void ApplyPushback(Vector2 direction, float magnitude)
+    {
+        StartCoroutine(PushbackCoroutine(direction, magnitude));
+    }
+    
+    private IEnumerator PushbackCoroutine(Vector2 direction, float magnitude)
+    {
+        var duration = 0.2f; // Pushback lasts for 0.2 seconds
+        var elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.position += (Vector3)(direction * (magnitude * Time.deltaTime));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void EffacerFalse()

@@ -173,7 +173,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -360,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: spawnInterval
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: enemyPrefabs.Array.size
@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 6216030212052024737, guid: 9b6d99bd408a7c03a802762fc37a982a, type: 3}
+    - target: {fileID: 6857631741796933475, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6216030212052024737, guid: 51f2e88b4c5cc60978cf5faea206d24a, type: 3}
     - target: {fileID: 7111327191048700432, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: player
       value: 

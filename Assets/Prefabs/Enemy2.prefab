@@ -145,6 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   spawner: {fileID: 0}
-  timeToLive: 10
+  timeToLive: 15
   target: {fileID: 0}
   followDistance: 0

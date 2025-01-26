@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d7fa24845138f41b9456490b4ec201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 3
   spawner: {fileID: 0}
-  timeToLive: 5
+  timeToLive: 10
   target: {fileID: 0}
   followDistance: 0
   pushbackForce: 10

@@ -64,23 +64,21 @@ public class EnemySpawner : MonoBehaviour
         enemyScript.spawner = this;
         _currentEnemyCount++;
 
-        // TODO: Handle enemy despawn
         return true;
     }
 
     private bool IsInsideBubble(Vector3 position)
     {
         // Check if the position is within the polygon collider
-        if (bubble != null) return bubble.OverlapPoint(position);
+        if (bubble is not null) return bubble.OverlapPoint(position);
         
         Debug.LogError("Bubble collider not assigned!");
         return false;
     }
 
-    private void HandleEnemyDespawn(GameObject enemy)
+    public void HandleEnemyDespawn()
     {
         _currentEnemyCount--;
-        Destroy(enemy);
     }
     
     private void OnDestroy()

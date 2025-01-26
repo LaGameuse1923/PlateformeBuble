@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cb2d6f29eaa5c49847ca35e1c144e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   spawner: {fileID: 0}
-  timeToLive: 2
+  timeToLive: 10
   target: {fileID: 0}
   followDistance: 0

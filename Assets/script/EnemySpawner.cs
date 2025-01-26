@@ -62,6 +62,7 @@ public class EnemySpawner : MonoBehaviour
         var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         var enemyScript = enemy.GetComponent<BaseEnemy>();
         enemyScript.spawner = this;
+        enemyScript.target = player;
         _currentEnemyCount++;
 
         return true;

@@ -78,6 +78,11 @@ public class PlayerFreeMovement : MonoBehaviour
     // {
     //     _isStunned = false;
     // }
+
+    public void teleportToPoint(Vector2 point)
+    {
+        transform.position = point;
+    }
     
     public void ApplyPushback(Vector2 direction, float magnitude)
     {

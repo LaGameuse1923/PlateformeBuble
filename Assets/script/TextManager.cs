@@ -13,7 +13,10 @@ public class TextManager : MonoBehaviour
     public float characterSpacingFactor = 0.1f; // Extra space between characters
     public float maxWidth = 100.0f; // Nb of units before line break
     public float lineHeight = 20.0f; // Nb of units before line break
+
+    public PlayerFreeMovement playerFreeMovement;
     
+
     public Color normalColor = Color.black;
     public Color errorColor = Color.red;
     
@@ -146,6 +149,7 @@ public class TextManager : MonoBehaviour
                 
                 var charController = charObject.GetComponent<CharacterController>();
                 charController.CorrectCharacter = character.expected; // Set the correct character
+                charController.playerFreeMovement = playerFreeMovement;
                 charController.isCorrect = character.result == StringComparer.ComparisonResult.Correct;
                 textComponent.ForceMeshUpdate();
 

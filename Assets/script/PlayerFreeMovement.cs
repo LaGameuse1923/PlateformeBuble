@@ -60,9 +60,18 @@ public class PlayerFreeMovement : MonoBehaviour
 
     public void Effacer()
     {
+
+        EffacerTrue();
+
+        
+        Invoke("EffacerFalse",0.9f);
+
+
+    }
+
+    public void EffacerTrue()
+    {
         effacer = true;
-        animator.SetBool("Effacer", effacer);
-        effacer = false;
         animator.SetBool("Effacer", effacer);
     }
     
@@ -102,5 +111,11 @@ public class PlayerFreeMovement : MonoBehaviour
         }
     }
 
-    
+    public void EffacerFalse()
+    {
+        effacer = false;
+        
+        animator.SetBool("Effacer", effacer);
+    }
+
 }

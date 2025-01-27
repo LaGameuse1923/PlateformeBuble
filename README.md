@@ -10,7 +10,10 @@ Gabriel Martinache, Nicolas Guillois, all students of ESMA Rennes (with the exce
 ## Game
 This game is made with Unity 2022. All assets are written and drawn with our hands.
 
+## Bugs
+The game is designed to be played in 1920x1080 resolution and can be unplayable in other resolutions
+
 ## Licence
-Bubble to Speech © 2025 by Stepan Tyurin, Maxence, Maxime, ... is licensed under
-[Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/)
-licence.
+Bubble to Speech © 2025 by Stepan Tyurin, Kelvyn Grimault, Maxence Dixneuf, Erwann Baesens-Prigent, Nataël Forget, 
+Gabriel Martinache, Nicolas Guillois is licensed under the Attribution-Noncommercial-Share Alike 4.0 version of the Creative Commons License.
+More details in [license.txt](license.txt).

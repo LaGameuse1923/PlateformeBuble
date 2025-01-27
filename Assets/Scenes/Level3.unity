@@ -2277,7 +2277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fdc1095e6b5a74293f68e3056210bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 0}
+  textManager: {fileID: 1421256583}
   nombreErreur: 5
   nombreErreurRestante: 5
   NombreErreur: {fileID: 1764115731}

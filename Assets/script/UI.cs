@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +30,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        TextTimer.text = "Temp : " + Timer.ToString();
+        TextTimer.text = "Temp : " + Timer;
         StartCoroutine(WaitAndPrint());
         videoPlayer.Play();
         
@@ -41,15 +39,17 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NombreErreur.text = nombreErreurRestante + " Typos Left".ToString();
-        TextTimer.text = "Times: " + Timer.ToString();
+        TextTimer.text = "Times: " + Timer;
         BarreDePopulariter.fillAmount = nombreErreurRestante / nombreErreur;
-        if (textManager != null)
+        if (textManager is not null)
+        {
             nombreErreurRestante = textManager.GetError();
-    
-        
-
-        //Debug.Log(nombreErreurRestante);
+            NombreErreur.text = nombreErreurRestante + " Typos Left";
+        }
+        else
+        {
+            NombreErreur.text = "999 left!";
+        }
     }
 
     IEnumerator WaitAndPrint()

@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fdc1095e6b5a74293f68e3056210bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 0}
+  textManager: {fileID: 109053526}
   nombreErreur: 5
   nombreErreurRestante: 5
   NombreErreur: {fileID: 1372287422}
@@ -1293,8 +1293,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4933262304229553827, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: initialText
-      value: From this day forward, the United States of America shall be a free,
-        sovereign, and independent nation.
+      value: Form this day foryard, the Unintendo States of America shall bet a tree,
+        sovereign, band independent notion.
       objectReference: {fileID: 0}
     - target: {fileID: 4933262304229553827, guid: d4409adc4ff44a27bb2795dda29ea959, type: 3}
       propertyPath: playerFreeMovement
